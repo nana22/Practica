@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Simple markers</title>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        
+        #map {
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="map"></div>
+    <input type="button" id="marcador" value="Click me">
+    <script>
+        function initMap() {
+            var myLatLng = {
+                lat: -25.363
+                , lng: 131.044
+            };
+
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 4
+                , center: myLatLng
+            });
+
+
+            var icon1 = "http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.7|0|941|12|_|" + "1";
+            var icon2 = "http://chart.apis.google.com/chart?chst=d_map_spin&chld=1|0|496|12|_|" + "2";
+
+            var marker = new google.maps.Marker({
+                position: myLatLng
+                , map: map
+                , icon: icon1
+                , animation: google.maps.Animation.DROP
+                , title: "Marcador"
+            });
+            $("#marcador").mouseover(function () {
+                marker.setIcon(icon2);
+                marker.setAnimation(google.maps.Animation.BOUNCE);
+
+            });
+            $("#marcador").mouseout(function () {
+                marker.setIcon(icon1);
+                marker.setAnimation(null);
+
+            });
+        }
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAU0seMWz-ch7FoA-QB99fBpH3JTMIZle8&signed_in=true&callback=initMap"></script>
+</body>
+
+</html>
